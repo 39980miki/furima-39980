@@ -31,7 +31,7 @@
 |user         |references|null: false,foreign_key: true|
 ### Association
 -belongs_to :user
--belongs_to :purchase
+-has_one :purchase
 
 
 ## purchasesテーブル
@@ -42,7 +42,7 @@
 
 ### Association
 -belongs_to :user
--has_one :item
+-belongs_to :item
 -has_one :address
 
 
