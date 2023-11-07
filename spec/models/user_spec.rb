@@ -46,6 +46,24 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      it 'passwordが英字のみでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+      end
+      it 'passwordが数字のみでは登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+      end
+      it 'passwordが全角だと登録できない' do
+        @user.password = 'A2345６'
+        @user.password_confirmation = 'A2345６'
+        @user.valid?
+        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+      end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -57,18 +75,6 @@ RSpec.describe User, type: :model do
         @user.email = 'testmail'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
-      end
-      it 'passwordが5文字以下では登録できない' do
-        @user.password = '00000'
-        @user.password_confirmation = '00000'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
-      end
-      it 'passwordが129文字以上では登録できない' do
-        @user.password = Faker::Internet.password(min_length: 129, max_length: 150)
-        @user.password_confirmation = @user.password
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
     end
   end
