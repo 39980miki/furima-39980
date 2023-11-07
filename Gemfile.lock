@@ -97,7 +97,17 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.5.0)
     erubi (1.12.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (3.2.2)
+      i18n (>= 1.8.11, < 2)
+    gimei (1.2.0)
+      romaji
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -198,6 +208,25 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
+    romaji (0.2.4)
+      rake (>= 0.8.0)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (4.0.2)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
+    rspec-support (3.12.1)
     rubocop (1.57.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -265,12 +294,16 @@ DEPENDENCIES
   capybara
   debug
   devise
+  factory_bot_rails
+  faker
+  gimei
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
   pg
   puma (~> 5.0)
   rails (~> 7.0.0)
+  rspec-rails (~> 4.0.0)
   rubocop
   selenium-webdriver
   sprockets-rails
