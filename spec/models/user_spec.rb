@@ -46,23 +46,24 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'passwordが英字のみでは登録できない' do
-        @user.password = 'aaaaaa'
-        @user.password_confirmation = 'aaaaaa'
+      it "passwordが英字のみでは登録できない" do
+        @user.password = "aaaaaa"
+        @user.password_confirmation = "aaaaaa"
         @user.valid?
-        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+        # binding.pry
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
-      it 'passwordが数字のみでは登録できない' do
-        @user.password = '123456'
-        @user.password_confirmation = '123456'
+      it "passwordが数字のみでは登録できない" do
+        @user.password = "123456"
+        @user.password_confirmation = "123456"
         @user.valid?
-        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
-      it 'passwordが全角だと登録できない' do
-        @user.password = 'A2345６'
-        @user.password_confirmation = 'A2345６'
+      it "passwordが全角だと登録できない" do
+        @user.password = "A2345６"
+        @user.password_confirmation = "A2345６"
         @user.valid?
-        expect(@user.errors.full_messages).to inclide("Passwordには半角英字と半角数字の両方を含めて設定 ")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
@@ -79,42 +80,42 @@ RSpec.describe User, type: :model do
       it 'family_nameが空では登録できない' do
         @user.family_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family_name can't be blank")
+        expect(@user.errors.full_messages).to include("Family name is invalid")
       end
       it 'family_nameが半角文字が含まれている場合は登録できない' do
         @user.family_name = 'ﾔﾏﾀﾞ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family_nameが半角文字が含まれている場合は登録できない")
+        expect(@user.errors.full_messages).to include("Family name is invalid")
       end
       it 'first_nameが空では登録できない' do
         @user.first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First_name can't be blank")
+        expect(@user.errors.full_messages).to include("First name is invalid")
       end
       it 'first_nameが半角文字が含まれている場合は登録できない' do
-        @user.family_name = 'ﾘｸﾀﾛｳ'
+        @user.first_name = 'ﾘｸﾀﾛｳ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First_name が半角文字が含まれている場合は登録できない")
+        expect(@user.errors.full_messages).to include("First name is invalid")
       end
       it 'family_name_kanaが空では登録できない' do
         @user.family_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family_name_kana can't be blank")
+        expect(@user.errors.full_messages).to include("Family name kana is invalid")
       end
       it 'family_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない' do
         @user.family_name_kana = 'やまだ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない")
+        expect(@user.errors.full_messages).to include("Family name kana is invalid")
       end
-      it 'first_nameが空では登録できない' do
+      it 'first_name_kanaが空では登録できない' do
         @user.first_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First_name_kana can't be blank")
+        expect(@user.errors.full_messages).to include("First name kana is invalid")
       end
       it 'first_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない' do
         @user.first_name_kana = 'りくたろう'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない")
+        expect(@user.errors.full_messages).to include("First name kana is invalid")
       end
       it 'birthdayが空では登録できない' do
         @user.birthday = ''

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true
   # validates :email, uniqueness: true, format: { with: /@/ }
-  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/ }
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
   validates :family_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   validates :family_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/}
@@ -14,6 +14,6 @@ class User < ApplicationRecord
   validates :birthday, presence: true
 
 
-  has_many :items
+  # has_many :items
   # has_many :purchases
 end
