@@ -71,10 +71,55 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include ('Email has already been taken')
       end
-       it 'emailは@を含まないと登録できない' do
+      it 'emailは@を含まないと登録できない' do
         @user.email = 'testmail'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
+      end
+      it 'family_nameが空では登録できない' do
+        @user.family_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_name can't be blank")
+      end
+      it 'family_nameが半角文字が含まれている場合は登録できない' do
+        @user.family_name = 'ﾔﾏﾀﾞ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_nameが半角文字が含まれている場合は登録できない")
+      end
+      it 'first_nameが空では登録できない' do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name can't be blank")
+      end
+      it 'first_nameが半角文字が含まれている場合は登録できない' do
+        @user.family_name = 'ﾘｸﾀﾛｳ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name が半角文字が含まれている場合は登録できない")
+      end
+      it 'family_name_kanaが空では登録できない' do
+        @user.family_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_name_kana can't be blank")
+      end
+      it 'family_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない' do
+        @user.family_name_kana = 'やまだ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない")
+      end
+      it 'first_nameが空では登録できない' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name_kana can't be blank")
+      end
+      it 'first_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない' do
+        @user.first_name_kana = 'りくたろう'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name_kanaがカタカナ以外の文字(ひらがなや漢字)が含まれている場合は登録できない")
+      end
+      it 'birthdayが空では登録できない' do
+        @user.birthday = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
     end
   end
