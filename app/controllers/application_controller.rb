@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   #before_action :authenticate_user!#この記述により、ログインしていないユーザーをログインページ画面に促すことができる。
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
   private
 
   def basic_auth

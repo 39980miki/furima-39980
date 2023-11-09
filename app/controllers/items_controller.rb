@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
+
+
   def index
-    @items = Item.all.order("created_at DESC") #一覧が新規順に並ぶように
+    @items = Item.all
+    # @items = Item.all.order("created_at DESC") #一覧が新規順に並ぶように
   end
 
   def new

@@ -95,7 +95,6 @@ RSpec.describe Item, type: :model do
       it "priceが10,000,000以上では出品できない" do
         @item.price = 10000000
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
       it "ユーザーが紐付いていなければ出品できない" do
