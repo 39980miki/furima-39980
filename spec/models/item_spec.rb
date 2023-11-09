@@ -82,6 +82,22 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Etd can't be blank")
       end
+      it "priceが全角では出品できない" do
+        @item.price = "３００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "priceが300未満では出品できない" do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it "priceが10,000,000以上では出品できない" do
+        @item.price = 10000000
+        @item.valid?
+        binding.pry
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
       it "ユーザーが紐付いていなければ出品できない" do
         @item.user = nil
         @item.valid?
