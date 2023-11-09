@@ -3,8 +3,7 @@ class ItemsController < ApplicationController
 
 
   def index
-    @items = Item.all
-    # @items = Item.all.order("created_at DESC") #一覧が新規順に並ぶように
+    @items = Item.all.order("created_at DESC") #一覧が新規順に並ぶように
   end
 
   def new
