@@ -128,16 +128,6 @@
     </div>
     <ul class='item-lists'>
 
-      <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-      <%# <% @items.each do |item| %>
-        <%# <div class="content_post" style="background-image: url(<%= item.image %>
-          <%# <p><%= item.text %></p> 
-          <%# <span class="name"> %>
-            <%# <%= item.name %> 
-          <%# </span> %>
-        <%# </div> %>
-      <%# <% end %> 
-
       <% @items.each do |item| %>
         <li class='list'>
           <%= link_to "#" do %>
@@ -166,7 +156,6 @@
           <% end %>
         </li>
       <% end %>
-      <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
