@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :etd
 
   #空の投稿を保存できないようにする
-  validates :item_name, :description, :category_id, :charge_id, :prefecture_id, :etd_id, presence: true
+  validates :image, :item_name, :description, :category_id, :charge_id, :prefecture_id, :etd_id, :price, presence: true
 
   #ジャンルの選択が「---」の時は保存できないための記述
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
@@ -20,4 +20,3 @@ class Item < ApplicationRecord
   belongs_to :user
   # has_one :purchase
 end
-
