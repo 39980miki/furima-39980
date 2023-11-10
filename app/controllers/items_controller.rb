@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
-
-
+  before_action :authenticate_user!, only: [:new, :edit]
+  # if user_signed_in? && current_user.id == item.user_id
+  before_action :authorize_user!, only: [:edit, :update]
 
   def index
     @items = Item.all.order("created_at DESC") #一覧が新規順に並ぶように
@@ -30,7 +30,6 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    # @item.update(item_params)
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -42,6 +41,14 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :item_name, :description, :category_id, :condition_id, :charge_id, :prefecture_id, :etd_id, :price).merge(user_id: current_user.id)
+  end
+
+  def authorize_user!
+    @item = Item.find_by(id: params[:id])
+
+    unless @item && current_user == @item.user
+      redirect_to root_path, alert: "権限がありません"
+    end
   end
 
 end
