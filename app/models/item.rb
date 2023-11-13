@@ -17,5 +17,5 @@ class Item < ApplicationRecord
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
   belongs_to :user
-  # has_one :purchase
+  has_one :order
 end
