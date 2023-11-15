@@ -24,8 +24,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.order.present?
+      redirect_to root_path, alert: "売却済みの商品は編集できません"
+    end
   end
-
   def update
     if @item.update(item_params)
       redirect_to item_path(@item)
@@ -51,13 +53,13 @@ class ItemsController < ApplicationController
       redirect_to root_path, alert: "アイテムが見つかりません"
     end
   end
-
+  
   def authorize_user!
     @item = Item.find_by(id: params[:id])
-
-    unless @item && current_user == @item.user
+    if @item && current_user != @item.user
       redirect_to root_path, alert: "権限がありません"
     end
   end
+  
 
 end
