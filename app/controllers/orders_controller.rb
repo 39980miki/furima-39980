@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
-  # before_action :set_item, only: [:index, create]
   before_action :authorize_user!, only: :index
 
   def index
@@ -26,7 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_address).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number, :price)
+    params.require(:order_address).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number)
                                     .merge(item_id: @item.id, user_id: current_user.id, token: params[:token])
   end
 
