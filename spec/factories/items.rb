@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
     # image         {Faker::Lorem.sentence}
-    item_name     { "ExampleItem" }
-    description   { "This is an example item" }
+    item_name     { 'ExampleItem' }
+    description   { 'This is an example item' }
     category_id   { 2 }
     condition_id  { 2 }
     charge_id     { 2 }
