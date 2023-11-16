@@ -1,16 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :authorize_user!, only: :index
+  before_action :item
 
   def index
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
+    item
     @order_address = OrderAddress.new
   end
 
   def create
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
+    item
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -46,5 +45,10 @@ class OrdersController < ApplicationController
     elsif @order.present?
       redirect_to root_path
     end
+  end
+
+  def item
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+    @item = Item.find(params[:item_id])
   end
 end
