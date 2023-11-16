@@ -7,10 +7,8 @@ RSpec.describe Address, type: :model do
   end
 
   context '内容に問題がない場合' do
-    it "postcodeとprefecture_id、city、block、phone_numberがあれば保存できること" do
+    it 'postcodeとprefecture_id、city、block、phone_numberがあれば保存できること' do
       expect(@address).to be_valid
     end
   end
-
-
 end
