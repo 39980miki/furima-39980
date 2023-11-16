@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
-  before_action :authorize_user!, only: :index
   before_action :item, only: [:index, :create]
+  before_action :authorize_user!, only: :index
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -37,17 +37,16 @@ class OrdersController < ApplicationController
     )
   end
 
+  def item
+    @item = Item.find(params[:item_id])
+  end
+  
   def authorize_user!
-    item if params[:item_id].present?
     @order = Order.find(params[:order_id]) if params[:order_id].present?
     if current_user == @item.user
       redirect_to root_path
     elsif @order.present?
       redirect_to root_path
     end
-  end
-
-  def item
-    @item = Item.find(params[:item_id])
   end
 end
