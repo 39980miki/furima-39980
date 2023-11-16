@@ -30,4 +30,3 @@ const pay = () => {
 
 window.addEventListener("turbo:load", pay);
 window.addEventListener("turbo:render", pay);
-//コードの差分確認済み
