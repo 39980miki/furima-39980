@@ -102,3 +102,5 @@ gem 'payjp'
 gem 'gon'
 
 gem "aws-sdk-s3", require: false
+
+gem "unf_ext", "0.0.7.7"
